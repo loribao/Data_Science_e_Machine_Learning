@@ -2,7 +2,7 @@
 
 <hr>
 
-Este é meu repositório pessoal, neste repositório armazeno os meus códigos gerados durante a minha aprendizagem e treinamento sobre Data Science com Python, Julia e R principalmente, c# e js alternativamente.
+Este é meu repositório pessoal, neste repositório armazeno os meus códigos gerados durante a minha aprendizagem e treinamento sobre Data Science com Python, Julia e R, c# e js alternativamente./
 
 
 <hr>
