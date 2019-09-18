@@ -46,11 +46,11 @@ print(Predict)
 #adicionando uma função de classificação(decisão) 0,1,2
 Predict_Classificado =  np.array([np.around(np.abs(x)) for x in Predict])
 #----------------------------------------------
-tree.plot_tree(td)
+
 from sklearn.metrics import mean_squared_error
 
 print('\n---------------Resultado final----------------------\n')
-td.tree_
+tree.plot_tree(td)
 print("\n-------------Legenda--------------\n")
 print(especies)
 print("\n----------------------------------\n")
