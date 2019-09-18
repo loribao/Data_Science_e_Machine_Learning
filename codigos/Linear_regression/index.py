@@ -50,7 +50,10 @@ print(lm.intercept_)
 print('\ncoef_: ')
 print(lm.coef_)
 print('\n---------------Resultado final----------------------\n')
-print('Y\tNao Classificado ->\t\tClassifido\n')
+
+print("\n-------------Legenda--------------\n")
+print(especies)
+print("\n----------------------------------\n")
+print('Y\tNao Classificado ->\t\tClassificado\n')
 for i in range(0,45):    
     print('{}\t{} -------> {}'.format(y_teste.iloc[i].values,predict[i],Classificar[i]))
-
