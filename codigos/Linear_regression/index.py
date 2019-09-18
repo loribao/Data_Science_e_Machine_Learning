@@ -29,19 +29,23 @@ x = x.astype(float)
 y = y.astype(float)
 
 x_treino,x_teste,y_treino,y_teste = train_test_split(x,y,test_size=0.3)
+
+#----------------------------------------------
 # instanciação da classe de regressão
 from sklearn.linear_model import LinearRegression
 
 lm = LinearRegression()
 
-#geração do modelo/treino
+#treino
 
 lm.fit(x_treino,y_treino)
-
+#predição
 Predict = lm.predict(x_teste)
-Predict_Classificado =  np.array([np.around(np.abs(x)) for x in Predict])
-sbs.distplot((y_teste - Predict))
-plt.show()
+#----------------------------------------------
+#adicionando uma função de classificação(decisão) 0,1,2
+#Predict_Classificado =  np.array([np.around(np.abs(x)) for x in Predict])
+# Não é preciso adicionar
+#----------------------------------------------
 
 from sklearn.metrics import mean_squared_error
 
@@ -56,10 +60,10 @@ print(especies)
 print("\n----------------------------------\n")
 print('Y\tPredict ->\t\tPredict Classificado\n')
 for i in range(0,45):    
-    print('{}\t{} -------> {}'.format(y_teste.iloc[i].values,Predict[i],Predict_Classificado[i]))
+    print('{} -------> \t{}'.format(y_teste.iloc[i].values,Predict[i]))
 
 from sklearn.metrics import confusion_matrix
-mt_confucao = confusion_matrix(y_teste,Predict_Classificado)
+mt_confucao = confusion_matrix(y_teste,Predict)
 plt.matshow(mt_confucao)
 plt.colorbar()
 plt.title = 'Matriz de confução'
