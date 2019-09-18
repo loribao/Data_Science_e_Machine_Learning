@@ -1,6 +1,5 @@
 #Objetivo: Aplicar diversos algortimos no dataset iris. Assim conhecer e interpretar os algortmos.
 #
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -15,7 +14,10 @@ iris = iris.join(especies,on='species')
 correlacao = iris.corr()
 
 sbs.heatmap(correlacao)
+plt.title='Correlação de variaveis'
+plt.show()
 sbs.pairplot(iris)
+plt.title="Pairplot"
 plt.show()
 # separação dos dados
 from sklearn.model_selection import train_test_split
@@ -36,15 +38,13 @@ lm = LinearRegression()
 
 lm.fit(x_treino,y_treino)
 
-predict = lm.predict(x_teste)
-Classificar =  np.array([np.around(x) for x in predict])
-sbs.distplot((y_teste - predict))
+Predict = lm.predict(x_teste)
+Predict_Classificado =  np.array([np.around(np.abs(x)) for x in Predict])
+sbs.distplot((y_teste - Predict))
 plt.show()
 
 from sklearn.metrics import mean_squared_error
 
-print('Predict Mean Squared Error:')
-print(mean_squared_error(y_teste,predict))
 print('\nintercept_: ')
 print(lm.intercept_)
 print('\ncoef_: ')
@@ -54,6 +54,15 @@ print('\n---------------Resultado final----------------------\n')
 print("\n-------------Legenda--------------\n")
 print(especies)
 print("\n----------------------------------\n")
-print('Y\tNao Classificado ->\t\tClassificado\n')
+print('Y\tPredict ->\t\tPredict Classificado\n')
 for i in range(0,45):    
-    print('{}\t{} -------> {}'.format(y_teste.iloc[i].values,predict[i],Classificar[i]))
+    print('{}\t{} -------> {}'.format(y_teste.iloc[i].values,Predict[i],Predict_Classificado[i]))
+
+from sklearn.metrics import confusion_matrix
+mt_confucao = confusion_matrix(y_teste,Predict_Classificado)
+plt.matshow(mt_confucao)
+plt.colorbar()
+plt.title = 'Matriz de confução'
+plt.ylabel = 'Classificações corretas'
+plt.xlabel = 'Classificações obtidas'
+plt.show()
