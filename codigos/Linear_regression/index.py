@@ -14,10 +14,10 @@ iris = iris.join(especies,on='species')
 correlacao = iris.corr()
 
 sbs.heatmap(correlacao)
-plt.title='Correlação de variaveis'
+plt.title('Correlação de variaveis')
 plt.show()
 sbs.pairplot(iris)
-plt.title="Pairplot"
+plt.title("Pairplot")
 plt.show()
 # separação dos dados
 from sklearn.model_selection import train_test_split
@@ -43,11 +43,8 @@ lm.fit(x_treino,y_treino)
 Predict = lm.predict(x_teste)
 #----------------------------------------------
 #adicionando uma função de classificação(decisão) 0,1,2
-#Predict_Classificado =  np.array([np.around(np.abs(x)) for x in Predict])
-# Não é preciso adicionar
+Predict_Classificado =  np.array([np.around(np.abs(x)) for x in Predict])
 #----------------------------------------------
-
-from sklearn.metrics import mean_squared_error
 
 print('\nintercept_: ')
 print(lm.intercept_)
@@ -58,15 +55,23 @@ print('\n---------------Resultado final----------------------\n')
 print("\n-------------Legenda--------------\n")
 print(especies)
 print("\n----------------------------------\n")
-print('Y\tPredict ->\t\tPredict Classificado\n')
+print('Y\tPredict ->\t\tPredict\tClassificado\n')
 for i in range(0,45):    
-    print('{} -------> \t{}'.format(y_teste.iloc[i].values,Predict[i]))
+    print('{} -------> \t{}\t{}'.format(y_teste.iloc[i].values,Predict[i],Predict_Classificado[i]))
 
 from sklearn.metrics import confusion_matrix
-mt_confucao = confusion_matrix(y_teste,Predict)
+mt_confucao = confusion_matrix(y_true=y_teste,y_pred=Predict_Classificado)
 plt.matshow(mt_confucao)
-plt.colorbar()
-plt.title = 'Matriz de confução'
-plt.ylabel = 'Classificações corretas'
-plt.xlabel = 'Classificações obtidas'
+plt.title('Matriz de confução')
+plt.ylabel('Classificações corretas')
+plt.xlabel('Classificações obtidas')
+plt.show()
+x_range = [x for x in range(0,45)]
+plt.scatter(y=y_teste.values,x=x_range)
+plt.plot(Predict)
+plt.title('Linear regression: Y ')
+plt.show()
+plt.scatter(y=y_teste.values,x=x_range)
+plt.plot(Predict_Classificado)
+plt.title("Classificado")
 plt.show()
